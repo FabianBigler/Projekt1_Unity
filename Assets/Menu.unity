@@ -284,8 +284,6 @@ GameObject:
   - 4: {fileID: 941108833}
   - 218: {fileID: 941108832}
   - 154: {fileID: 941108831}
-  - 114: {fileID: 941108836}
-  - 114: {fileID: 941108835}
   - 114: {fileID: 941108834}
   m_Layer: 0
   m_Name: Terrain
@@ -355,31 +353,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 941108830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6d03f84719a1d40baae89292bb549e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quit: 0
---- !u!114 &941108835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 941108830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6d03f84719a1d40baae89292bb549e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quit: 0
---- !u!114 &941108836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 941108830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6d03f84719a1d40baae89292bb549e, type: 3}
+  m_Script: {fileID: 11500000, guid: cc74ce0afd0d87845a63a67e8dc1e6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   quit: 0
