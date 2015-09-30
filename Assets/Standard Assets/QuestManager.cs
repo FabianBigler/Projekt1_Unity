@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour {
         quests.Add(1, "Find the house.");
         quests.Add(2, "The door is locked. Find the key to open the house!");
         quests.Add(3, "You found the key!");
+        quests.Add(4, "Find your daughter Kelly!");
     }
 	
 	// Update is called once per frame

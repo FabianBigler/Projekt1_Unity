@@ -32,7 +32,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private int m_CurrentMainQuestID;
         public Text QuestText;
         private Dictionary<int, string> quests;
-
+        public Inventory inventory;
+        
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -64,8 +65,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             quests = new Dictionary<int, string>();
             quests.Add(1, "Find the house.");
             quests.Add(2, "The door is locked. Find the key!");
-            quests.Add(3, "Enter the house");
+            quests.Add(3, "You found the key! Enter the house.");
             LoadQuest(1);
+
+            inventory = new Inventory();
+            inventory.AddItem("FlashLight");
         }
 
         public void LoadQuest(int questID)
@@ -268,6 +272,63 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Key"))
+            {
+                other.gameObject.SetActive(false);
+                inventory.AddItem("Key");
+                LoadQuest(3);
+            }
+        }
+    }
+
+    public class InventoryItem
+    {
+        public string Name { get; set; }
+        public int Amount { get; set; }
+    }
+        
+    public class Inventory
+    {
+        private List<InventoryItem> items;
+
+        public List<InventoryItem> Items { get { return items; } set { items = value; } }
+        public Inventory() { items = new List<InventoryItem>(); }
+
+        public void AddItem(string name)
+        {
+            var item = GetItem(name);
+            if (item == null)
+            {
+                items.Add(new InventoryItem { Name = name, Amount = 1 });
+            } else
+            {
+                item.Amount++;
+            }
+        }
+
+        public InventoryItem GetItem(string name)
+        {
+            foreach (var item in items)
+            {
+                if (item.Name.Equals(name))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+      
+        public void RemoveItem(string name)
+        {
+            var item = GetItem(name);
+            if (item != null)
+            {
+                items.Remove(item);
+            }
         }
     }
 }
