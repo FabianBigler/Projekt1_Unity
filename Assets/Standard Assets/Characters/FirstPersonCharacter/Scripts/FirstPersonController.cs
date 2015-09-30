@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
@@ -27,6 +29,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private int m_CurrentMainQuestID;
+        public Text QuestText;
+        private Dictionary<int, string> quests;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -55,6 +60,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            quests = new Dictionary<int, string>();
+            quests.Add(1, "Find the house.");
+            quests.Add(2, "The door is locked. Find the key!");
+            quests.Add(3, "Enter the house");
+            LoadQuest(1);
+        }
+
+        public void LoadQuest(int questID)
+        {
+            QuestText.text = quests[questID];
         }
 
 
