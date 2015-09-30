@@ -66,6 +66,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             quests.Add(1, "Find the house.");
             quests.Add(2, "The door is locked. Find the key!");
             quests.Add(3, "You found the key! Enter the house.");
+            quests.Add(4, "Find your daughter Kelly!");
             LoadQuest(1);
 
             inventory = new Inventory();
