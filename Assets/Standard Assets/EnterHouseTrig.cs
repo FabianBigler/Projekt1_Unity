@@ -7,13 +7,14 @@ public class EnterHouseTrig : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         var controller = other.gameObject.GetComponent<FirstPersonController>();
-        var item = controller.inventory.GetItem("Key");
+        var item = (controller.inventory != null ? controller.inventory.GetItem("Key") : null);
         if (item == null)
         {
             controller.LoadQuest(2);
         }
         else
         {
+            Application.LoadLevel(0);
             controller.LoadQuest(4);
         }
     }
