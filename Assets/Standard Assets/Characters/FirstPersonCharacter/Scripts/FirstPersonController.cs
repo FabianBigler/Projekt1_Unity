@@ -279,9 +279,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.CompareTag("Key"))
             {
+                
                 other.gameObject.SetActive(false);
-                inventory.AddItem("Key");
+                inventory.AddItem(other.gameObject.tag);
                 LoadQuest(3);
+            }
+            if (other.gameObject.CompareTag("Battery"))
+            {
+                other.gameObject.SetActive(false);
+                var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
+                var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");
+                var flashLight = flashLightGameObj.GetComponent<FlashLight>();
+                flashLight.Recharge();                
+                inventory.AddItem(other.gameObject.tag);
             }
         }
     }
