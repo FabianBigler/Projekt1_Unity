@@ -1,3 +1,4 @@
+using Assets.Standard_Assets;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
         [SerializeField] private int m_CurrentMainQuestID;
         public Text QuestText;
+        public Text DialogText;
         private Dictionary<int, string> quests;
         public Inventory inventory;
         public GameObject NPCTarget;
@@ -48,6 +50,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private QuestManager questManager;
+        private DialogService dialogService;
 
         // Use this for initialization
         private void Start()
@@ -62,23 +66,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-
-            quests = new Dictionary<int, string>();
-            quests.Add(1, "Find the house.");
-            quests.Add(2, "The door is locked. Find the key!");
-            quests.Add(3, "You found the key! Enter the house.");
-            quests.Add(4, "Find your daughter Kelly!");
-            LoadQuest(1);
-
+            questManager = new QuestManager(QuestText);
+            questManager.LoadQuest(1);
+            dialogService = new DialogService(DialogText);
+            dialogService.ShowDialog("hallooo");
             inventory = new Inventory();
             inventory.AddItem("FlashLight");
         }
-
-        public void LoadQuest(int questID)
-        {
-            QuestText.text = quests[questID];
-        }
-
 
         // Update is called once per frame
         private void Update()
@@ -105,6 +99,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
+        public void LoadQuest(int questId)
+        {
+            questManager.LoadQuest(questId);
+        }
+
 
         private void PlayLandingSound()
         {
@@ -119,16 +118,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f);
+                               m_CharacterController.height / 2f);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            m_MoveDir.x = desiredMove.x * speed;
+            m_MoveDir.z = desiredMove.z * speed;
 
 
             if (m_CharacterController.isGrounded)
@@ -145,15 +144,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
+                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
-            NPCTarget.transform.Translate(m_MoveDir*Time.fixedDeltaTime);
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+            NPCTarget.transform.Translate(m_MoveDir * Time.fixedDeltaTime);
 
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
         }
+
 
 
         private void PlayJumpSound()
@@ -285,7 +285,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 
                 other.gameObject.SetActive(false);
                 inventory.AddItem(other.gameObject.tag);
-                LoadQuest(3);
+                questManager.LoadQuest(3);
             }
             if (other.gameObject.CompareTag("Battery"))
             {
