@@ -14,9 +14,9 @@ namespace Assets.Standard_Assets
             dialogText = dialog;
         }
 
-        public void ShowDialog(string text) 
+        public void ShowDialog(string sender, string text) 
         {
-            dialogText.text = text;
+            dialogText.text = sender +": " + text;
         }
     }
 }

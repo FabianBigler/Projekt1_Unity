@@ -69,7 +69,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             questManager = new QuestManager(QuestText);
             questManager.LoadQuest(1);
             dialogService = new DialogService(DialogText);
-            dialogService.ShowDialog("hallooo");
             inventory = new Inventory();
             inventory.AddItem("FlashLight");
         }
@@ -104,7 +103,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             questManager.LoadQuest(questId);
         }
 
+        public void Tell(string sender, string message)
+        {
+            dialogService.ShowDialog(sender, message);
+        }
 
+        public void Ask(string message)
+        {
+
+        }
+ 
         private void PlayLandingSound()
         {
             m_AudioSource.clip = m_LandSound;
