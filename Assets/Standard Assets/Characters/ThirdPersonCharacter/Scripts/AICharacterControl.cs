@@ -12,10 +12,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public Transform target; // target to aim for
         public MoveState moveState;
         public AICharacterState characterState;
-
-        public bool IsInjured;
-        public bool IsDead;
-        public bool IsScared;
+        public bool IsInjured { get; set; }
+        public bool IsBlinded { get; set; }
+        public bool IsScared { get; set; }
+        public bool IsDead { get; set; }
 
         // Use this for initialization
         private void Start()
@@ -23,16 +23,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
-            characterState = MoveState.Follow;
-
+            moveState = MoveState.Follow;
+            SetState(new AICharacterStateFollow());
             agent.updateRotation = false;
 	        agent.updatePosition = true;
         }
 
         public void SetState(AICharacterState newState)
         {
-            characterState = newState;
-            //characterState.Blind
+            characterState = newState;                        
         }
 
 

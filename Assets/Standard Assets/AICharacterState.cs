@@ -4,10 +4,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 using System;
 
 public abstract class AICharacterState {
-    public bool Injured { get; set; }
-    public bool Blinded { get; set; }
-    public bool Scared { get; set; }
-
     public abstract void Injure(AICharacterControl context);
 
     public abstract void Heal(AICharacterControl context);
@@ -49,11 +45,14 @@ public class AICharacterStateFollow : AICharacterState
     public override void Scare(AICharacterControl context)
     {
         context.SetState(new AICharacterStateStand());
+        context.IsScared = true;
     }
 
     public override void TalkTo(AICharacterControl context)
     {
-        if(!context.IsDead) context.SetState(new AICharacterStateFollow());
+        if (!context.IsDead)
+            context.IsScared = false;
+            context.SetState(new AICharacterStateFollow());
     }
 }
 
@@ -87,7 +86,7 @@ public class AICharacterStateStand : AICharacterState
 
     public override void TalkTo(AICharacterControl context)
     {
-        context.SetState(new AICharacterStateFollow);
+        context.SetState(new AICharacterStateFollow());
         context.moveState = MoveState.Follow;
     }
 }
