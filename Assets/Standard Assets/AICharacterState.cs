@@ -4,17 +4,17 @@ using UnityStandardAssets.Characters.ThirdPerson;
 using System;
 
 public abstract class AICharacterState {
-    public abstract void Injure(AICharacterControl context);
+    public virtual void Injure(AICharacterControl context) { }
 
-    public abstract void Heal(AICharacterControl context);
+    public virtual void Heal(AICharacterControl context) { }
 
-    public abstract void Scare(AICharacterControl context);
+    public virtual void Scare(AICharacterControl context) { }
 
-    public abstract void Blind(AICharacterControl context);
+    public virtual void Blind(AICharacterControl context) { }
 
-    public abstract void Abandon(AICharacterControl context);
+    public virtual void Abandon(AICharacterControl context) { }
 
-    public abstract void TalkTo(AICharacterControl context);
+    public virtual void TalkTo(AICharacterControl context) { }
 }
 
 
@@ -24,16 +24,6 @@ public class AICharacterStateFollow : AICharacterState
     {
         context.SetState(new AICharacterStateDead());
         context.IsDead = true;
-    }
-
-    public override void Blind(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Heal(AICharacterControl context)
-    {
-        throw new NotImplementedException();
     }
 
     public override void Injure(AICharacterControl context)
@@ -46,12 +36,14 @@ public class AICharacterStateFollow : AICharacterState
     {
         context.SetState(new AICharacterStateStand());
         context.IsScared = true;
+        context.moveState = MoveState.Stand;
     }
 
     public override void TalkTo(AICharacterControl context)
     {
         if (!context.IsDead)
             context.IsScared = false;
+            context.moveState = MoveState.Follow;
             context.SetState(new AICharacterStateFollow());
     }
 }
@@ -64,24 +56,9 @@ public class AICharacterStateStand : AICharacterState
         context.SetState(new AICharacterStateDead());
     }
 
-    public override void Blind(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Heal(AICharacterControl context)
     {
         context.SetState(new AICharacterStateFollow());
-    }
-
-    public override void Injure(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Scare(AICharacterControl context)
-    {
-        throw new NotImplementedException();
     }
 
     public override void TalkTo(AICharacterControl context)
@@ -93,33 +70,8 @@ public class AICharacterStateStand : AICharacterState
 
 public class AICharacterStateDead : AICharacterState
 {
-    public override void Abandon(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Blind(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Heal(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Injure(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Scare(AICharacterControl context)
-    {
-        throw new NotImplementedException();
-    }
-
     public override void TalkTo(AICharacterControl context)
     {
-        throw new NotImplementedException();
+        //maybe add a joke answer
     }
 }

@@ -33,8 +33,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private int m_CurrentMainQuestID;
         public Text QuestText;
         public Text DialogText;
-        private Dictionary<int, string> quests;
-        public Inventory inventory;
         public GameObject NPCTarget;
         
         private Camera m_Camera;
@@ -52,6 +50,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         private QuestManager questManager;
         private DialogService dialogService;
+        public Inventory inventory;
 
         // Use this for initialization
         private void Start()

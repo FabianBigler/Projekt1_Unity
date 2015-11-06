@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -16,6 +17,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool IsBlinded { get; set; }
         public bool IsScared { get; set; }
         public bool IsDead { get; set; }
+        private List<string> defaultAnswers;
+        private List<string> scaredAnswers;
+        private List<string> deadAnswers;
+        private List<string> blindedAnswers;
 
         // Use this for initialization
         private void Start()
@@ -27,6 +32,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             SetState(new AICharacterStateFollow());
             agent.updateRotation = false;
 	        agent.updatePosition = true;
+
+            defaultAnswers = new List<string>();
+            defaultAnswers.Add("Hey, we need to hurry! Kelly is in danger!");
+            defaultAnswers.Add("Don't you dare thinking about touching me, we got more pressing matters to attend to!");
+            defaultAnswers.Add("What's up?");
+            defaultAnswers.Add("What are you looking at?");
+            scaredAnswers = new List<string>();
+            scaredAnswers.Add("I'm so scared!");
+            scaredAnswers.Add("Please don't leave me alone!");
+            deadAnswers = new List<string>();
+            deadAnswers.Add("You failed me!");
+            deadAnswers.Add("Go away!");
+            blindedAnswers = new List<string>();
+            blindedAnswers.Add("That's not funny!");
+            blindedAnswers.Add("You're pissing me off. Lead the way!");
+            blindedAnswers.Add("Will you stop that now?");
         }
 
         public void SetState(AICharacterState newState)
@@ -34,24 +55,56 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             characterState = newState;                        
         }
 
-
         // Update is called once per frame
         private void Update()
         {
-            if (moveState == MoveState.Follow)
+            switch(moveState)
             {
-                if (target != null)
-                {
-                    agent.SetDestination(target.position);
-                    // use the values to move the character
-                    character.Move(agent.desiredVelocity, false, false);
-                }
-                else
-                {
-                    // We still need to call the character's move function, but we send zeroed input as the move param.
+                case MoveState.Follow:
+                    if (target != null)
+                    {
+                        agent.SetDestination(target.position);
+                        character.Move(agent.desiredVelocity, false, false);
+                    }
+                    else
+                    {
+                        character.Move(Vector3.zero, false, false);
+                    }
+                    break;
+                case MoveState.Stand:
+                    agent.SetDestination(Vector3.zero);
                     character.Move(Vector3.zero, false, false);
-                }
+                    break;
             }
+        }
+
+        public string GetAnswer()
+        {
+            string answer = string.Empty;
+            if (IsScared)
+            {
+                answer = getRandomAnswer(scaredAnswers);
+            }
+            if (IsDead)
+            {
+                answer = getRandomAnswer(deadAnswers);
+            }
+            if (IsBlinded)
+            {
+                answer = getRandomAnswer(blindedAnswers);
+            }
+            if (string.IsNullOrEmpty(answer))
+            {
+                answer = getRandomAnswer(defaultAnswers);
+            }
+            return answer;
+        }
+
+        private string getRandomAnswer(List<string> answers)
+        {
+            UnityEngine.Random rand = new UnityEngine.Random();
+            int randIndex = UnityEngine.Random.Range(0, (answers.Count - 1));
+            return answers[randIndex];
         }
 
         public void SetTarget(Transform target)
