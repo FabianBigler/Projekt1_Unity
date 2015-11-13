@@ -26,41 +26,7 @@ public class JumpScareTrig : MonoBehaviour
             GetComponent<AudioSource>().Play();
             var control = AiController.GetComponent<AICharacterControl>();
             control.characterState.Scare(control);
+            Destroy(ScarePane, 1f);
         }
-        //StartCoroutine(waitSomeTime());
-        //Destroy(gameObject);
-        //StartCoroutine(waitSomeTime());
-        //ScarePane.GetComponent<Renderer>().enabled = false;
-        //Destroy(gameObject);                        
-        //makePlayerScream();
     }
-
-    //void Update()
-    //{
-    //    if (trig == true)
-    //    {
-    //        StartCoroutine(waitSomeTime());
-    //        Destroy(gameObject);
-    //        //GetComponent<AudioSource>().Play();
-    //    }
-    //}
-
-    //private IEnumerator waitSomeTime()
-    //{
-    //    yield return new WaitForSeconds(1f);        
-    //    ScarePane.GetComponent<Renderer>().enabled = false;
-    //    Destroy(gameObject);
-    //    trig = false;     
-    //}
-
-    //private IEnumerator makePlayerScream()
-    //{
-    //    if (!played)
-    //    {
-    //        played = true;
-    //        GetComponent<AudioSource>().Play();
-    //    }
-    //    yield return 0;
-    //}
-
 }

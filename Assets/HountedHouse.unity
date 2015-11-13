@@ -18902,6 +18902,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6450972, guid: 4f13c956f2c771542a07a197a4d6fdf5, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f13c956f2c771542a07a197a4d6fdf5, type: 2}
   m_IsPrefabParent: 0
@@ -20821,8 +20825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad7265ee93153e4391afe2218d5a73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HingeSide: 0
-  SwingSide: 0
+  HingeSide: 1
+  SwingSide: 1
   Angle: 90
   Speed: 3
   TimesOpenable: 0
