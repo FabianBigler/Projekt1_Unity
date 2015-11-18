@@ -14,11 +14,14 @@ public class EnterDialogTrig : MonoBehaviour {
 
     //public GameObject hero;
     void OnTriggerEnter(Collider other)
-    {                
+    {               
         var player = other.gameObject.GetComponent<FirstPersonController>();
-        var control = GetComponent<AICharacterControl>();
-        player.Tell("Jenny", control.GetAnswer());
-        control.characterState.TalkTo(control);
+        if(player != null)
+        {
+            var control = GetComponent<AICharacterControl>();
+            player.Tell("Jenny", control.GetAnswer());
+            control.characterState.TalkTo(control);
+        }
     }
 }
 

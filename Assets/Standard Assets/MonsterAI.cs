@@ -8,13 +8,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class MonsterAI : MonoBehaviour
     {
-        public ThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Transform target; // target to aim for
+        //public ThirdPersonCharacter character { get; private set; } // the character we are controlling
+        //public Transform target; // target to aim for
         private Animator animator;
-
-        private EnemySight enemySight;                          // Reference to the EnemySight script.
+        private EnemySight enemySight;
+        // Reference to the EnemySight script.
         private NavMeshAgent nav;                               // Reference to the nav mesh agent.
-        private Transform player;                               // Reference to the player's transform.
+        //private Transform player;                               // Reference to the player's transform.
        // private LastPlayerSighting lastPlayerSighting;          // Reference to the last global sighting of the player.
         private float chaseTimer;                               // A timer for the chaseWaitTime.
         private float patrolTimer;                              // A timer for the patrolWaitTime.
@@ -24,64 +24,132 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public float chaseSpeed = 5f;                           // The nav mesh agent's speed when chasing.
         public float chaseWaitTime = 5f;                        // The amount of time to wait when the last sighting is reached.
         public float patrolWaitTime = 1f;                       // The amount of time to wait when the patrol way point is reached.
-        public Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
+        private Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
+        public Transform patrolWayPoint1;
+        public Transform patrolWayPoint2;
 
         void Awake()
         {
             // Setting up the references.
-            //enemySight = GetComponent<EnemySight>();
-            nav = GetComponent<NavMeshAgent>();
-            player = GameObject.FindGameObjectWithTag("Hero").transform;
+            
             //lastPlayerSighting = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<LastPlayerSighting>();
         }
 
         // Use this for initialization
         private void Start()
         {
+            enemySight = GetComponent<EnemySight>();
+            nav = GetComponent<NavMeshAgent>();
+            //player = GameObject.FindGameObjectWithTag("Hero").transform;
             animator = GetComponent<Animator>();
-            //animator.SetTrigger("creature1run");
-            //animator.SetTrigger("creature1walkforward");
             animator.Play("creature1walkforward");
             // get the components on the object we need ( should not be null due to require component so no need to check )
             nav = GetComponentInChildren<NavMeshAgent>();
-            character = GetComponent<ThirdPersonCharacter>();
-          //  moveState = MoveState.Follow;
-            nav.updateRotation = false;
-            nav.updatePosition = true;;
+            //character = GetComponent<ThirdPersonCharacter>();
+            nav.updateRotation = true;
+            nav.updatePosition = true;
+            patrolWayPoints = new [] { patrolWayPoint1, patrolWayPoint2 };
+            //int[] n3 = { 2, 4, 6, 8 };
         }
 
         void Chasing()
         {
+            nav.speed = chaseSpeed;
+            
+            nav.destination = enemySight.targetHero.transform.position;
+           // nav.SetDestination(enemySight.personalLastSighting);
+           // character.Move(nav.desiredVelocity, false, false);
 
+            // Create a vector from the enemy to the last sighting of the player.
+            //Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
+            
+            if (nav.remainingDistance <= nav.stoppingDistance)
+            {
+                animator.SetTrigger("creature1attack1");
+            }
+            else
+            {
+                //animator.SetTrigger("creature1roar");
+                animator.SetTrigger("creature1run");
+            }
+            // If the the last personal sighting of the player is not close...
+            //if (sightingDeltaPos.sqrMagnitude > 4f)
+            //    // ... set the destination for the NavMeshAgent to the last personal sighting of the player.
+            //    nav.destination = enemySight.personalLastSighting;
+
+            // Set the appropriate speed for the NavMeshAgent.
+            //nav.speed = chaseSpeed;
+ 
+            //// If near the last personal sighting...
+            //if (nav.remainingDistance < nav.stoppingDistance)
+            //{
+            //    // ... increment the timer.
+            //    chaseTimer += Time.deltaTime;
+
+            //    // If the timer exceeds the wait time...
+            //    if (chaseTimer >= chaseWaitTime)
+            //    {      
+            //        //enemySight.personalLastSighting = lastPlayerSighting.resetPosition;
+            //        chaseTimer = 0f;
+            //    }
+            //}
+            //else
+            //    // If not near the last sighting personal sighting of the player, reset the timer.
+            //    chaseTimer = 0f;
         }
 
+        //private void Update()
+        //{
+        //    switch (moveState)
+        //    {
+        //        case MoveState.Follow:
+        //            if (target != null)
+        //            {
+        //                agent.SetDestination(target.position);
+        //                character.Move(agent.desiredVelocity, false, false);
+        //            }
+        //            else
+        //            {
+        //                character.Move(Vector3.zero, false, false);
+        //            }
+        //            break;
+        //        case MoveState.Stand:
+        //            agent.SetDestination(Vector3.zero);
+        //            character.Move(Vector3.zero, false, false);
+        //            break;
+        //    }
+        //}
 
+        void Patrolling()
+        {
+            nav.speed = patrolSpeed;
+            if (nav.remainingDistance <= nav.stoppingDistance)
+            {
+                // ... increment the wayPointIndex.
+                if (wayPointIndex == patrolWayPoints.Length - 1)
+                    wayPointIndex = 0;
+                else
+                    wayPointIndex++;
+            }
+             nav.destination = patrolWayPoints[wayPointIndex].position;
+        }
+
+    
         // Update is called once per frame
         private void Update()
         {
-            //switch (moveState)
-            //{
-            //    case MoveState.Follow:
-            //        if (target != null)
-            //        {
-            //            agent.SetDestination(target.position);
-            //            character.Move(agent.desiredVelocity, false, false);
-            //        }
-            //        else
-            //        {
-            //            character.Move(Vector3.zero, false, false);
-            //        }
-            //        break;
-            //    case MoveState.Stand:
-            //        agent.SetDestination(Vector3.zero);
-            //        character.Move(Vector3.zero, false, false);
-            //        break;
-            //}
+            //character.Move(nav.desiredVelocity, false, false);
+
+            // If the player is in sight and is alive...
+            if (enemySight.playerInSight)
+                Chasing();
+            else
+                Patrolling();
         }
 
-        public void SetTarget(Transform target)
-        {
-            this.target = target;
-        }
+        //public void SetTarget(Transform target)
+        //{
+        //    this.target = target;
+        //}
     }
 }
