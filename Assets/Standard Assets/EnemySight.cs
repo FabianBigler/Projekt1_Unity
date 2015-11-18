@@ -11,7 +11,6 @@ public class EnemySight : MonoBehaviour
 
     private NavMeshAgent nav;                       // Reference to the NavMeshAgent component.
     private SphereCollider col;                     // Reference to the sphere collider trigger component.
-    private Animator anim;                          // Reference to the Animator.
     //private LastPlayerSighting lastPlayerSighting;  // Reference to last global sighting of the player.
     private List<GameObject> players;                      // Reference to the player.
     private Animator playerAnim;                    // Reference to the player's animator component.
@@ -24,96 +23,44 @@ public class EnemySight : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         col = GetComponent<SphereCollider>();
-        anim = GetComponent<Animator>();
         players = new List<GameObject>();
         players.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
+        players.AddRange(GameObject.FindGameObjectsWithTag("NPCHero"));
     }
-    //void Awake()
-    //{
-    //    // Setting up the references.
-    //    nav = GetComponent<NavMeshAgent>();
-    //    col = GetComponent<SphereCollider>();
-    //    anim = GetComponent<Animator>();
-    //    players = new List<GameObject>();
-    //    players.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
-    //    //playerAnim = player.GetComponent<Animator>();
-    //    //playerHealth = player.GetComponent<PlayerHealth>();
-    //  //  hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<HashIDs>();
-
-    //    // Set the personal sighting and the previous sighting to the reset position.
-    //    //personalLastSighting = lastPlayerSighting.resetPosition;
-    //  //  previousSighting = lastPlayerSighting.resetPosition;
-    //}
-
-
-    void Update()
-    {
-
-        // If the last global sighting of the player has changed...
-      //  if (lastPlayerSighting.position != previousSighting)
-            // ... then update the personal sighting to be the same as the global sighting.
-    //        personalLastSighting = lastPlayerSighting.position;
-
-        // Set the previous sighting to the be the sighting from this frame.
-      //  previousSighting = lastPlayerSighting.position;
-
-        // If the player is alive...
-    //    if (playerHealth.health > 0f)
-            // ... set the animator parameter to whether the player is in sight or not.
-     //       anim.SetBool(hash.playerInSightBool, playerInSight);
-     //   else
-            // ... set the animator parameter to false.
-     //       anim.SetBool(hash.playerInSightBool, false);
-    }
-
 
     void OnTriggerStay(Collider other)
     {
-        var foundAnyPlayer = false;
-        foreach(var hero in players)
+        if(targetHero == null)
         {
-            if(other.gameObject == hero)
+            foreach (var hero in players)
             {
-                foundAnyPlayer = true;           
-                Vector3 direction = other.transform.position - transform.position;
-                float angle = Vector3.Angle(direction, transform.forward);
-                if (angle < fieldOfViewAngle * 0.5f)
+                if (other.gameObject == hero)
                 {
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
+                    Vector3 direction = other.transform.position - transform.position;
+                    float angle = Vector3.Angle(direction, transform.forward);
+                    if (angle < fieldOfViewAngle * 0.5f)
                     {
+                        RaycastHit hit;
+                        if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
+                        {
                             if (hit.collider.gameObject == hero)
                             {
-                                playerInSight = true;
                                 targetHero = hero;
+                                playerInSight = true;
+                            }
                         }
                     }
-                }
 
-                if (CalculatePathLength(hero.transform.position) <= col.radius)
-                { 
-                   // personalLastSighting = hero.transform.position;
-                    playerInSight = true;
-                    targetHero = hero;
+                    if (CalculatePathLength(hero.transform.position) <= col.radius)
+                    {
+                        // personalLastSighting = hero.transform.position;
+                        targetHero = hero;
+                        playerInSight = true;
+                    }
                 }
             }
         }
-
-        if(!foundAnyPlayer)
-        {
-            playerInSight = false;
-        }
     }
-
-
-    void OnTriggerExit(Collider other)
-    {
-        // If the player leaves the trigger zone...
-        if (other.gameObject == targetHero)
-            // ... the player is not in sight.
-            playerInSight = false;
-    }
-
 
     float CalculatePathLength(Vector3 targetPosition)
     {

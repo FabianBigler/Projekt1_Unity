@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class EnterDialogTrig : MonoBehaviour {    
     private AICharacterControl characterControl;
+    private bool keyIsPressed;
 
     void Start()
     {
@@ -13,14 +14,17 @@ public class EnterDialogTrig : MonoBehaviour {
     }
 
     //public GameObject hero;
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {               
         var player = other.gameObject.GetComponent<FirstPersonController>();
         if(player != null)
         {
-            var control = GetComponent<AICharacterControl>();
-            player.Tell("Jenny", control.GetAnswer());
-            control.characterState.TalkTo(control);
+            if (Input.GetKeyDown("e"))
+            {
+                var control = GetComponent<AICharacterControl>();
+                player.Tell("Jenny", control.GetAnswer());
+                control.characterState.TalkTo(control);
+            }
         }
     }
 }

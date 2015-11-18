@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private float chaseTimer;                               // A timer for the chaseWaitTime.
         private float patrolTimer;                              // A timer for the patrolWaitTime.
         private int wayPointIndex;                              // A counter for the way point array.
+        private bool isEscaping;
 
         public float patrolSpeed = 2f;                          // The nav mesh agent's speed when patrolling.
         public float chaseSpeed = 5f;                           // The nav mesh agent's speed when chasing.
@@ -27,13 +28,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
         public Transform patrolWayPoint1;
         public Transform patrolWayPoint2;
-
-        void Awake()
-        {
-            // Setting up the references.
-            
-            //lastPlayerSighting = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<LastPlayerSighting>();
-        }
 
         // Use this for initialization
         private void Start()
@@ -49,29 +43,42 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             nav.updateRotation = true;
             nav.updatePosition = true;
             patrolWayPoints = new [] { patrolWayPoint1, patrolWayPoint2 };
+            nav.destination = patrolWayPoints[wayPointIndex].position;
             //int[] n3 = { 2, 4, 6, 8 };
         }
 
         void Chasing()
         {
-            nav.speed = chaseSpeed;
-            
             nav.destination = enemySight.targetHero.transform.position;
-           // nav.SetDestination(enemySight.personalLastSighting);
-           // character.Move(nav.desiredVelocity, false, false);
-
-            // Create a vector from the enemy to the last sighting of the player.
-            //Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
-            
-            if (nav.remainingDistance <= nav.stoppingDistance)
+            if (Vector3.Distance(nav.nextPosition, nav.destination) > 2.0f)
+            {
+                animator.SetTrigger("creature1run");
+                nav.speed = chaseSpeed;
+            } else
             {
                 animator.SetTrigger("creature1attack1");
+                if(enemySight.targetHero.tag.Equals("NPCHero"))
+                {
+                    var aiControl = enemySight.targetHero.GetComponent<AICharacterControl>();
+                    if (aiControl != null)
+                    {
+                        aiControl.characterState.Injure(aiControl);
+                    }
+                }
+                
+                if(enemySight.targetHero.tag.Equals("Hero"))
+                {
+                    var player = enemySight.targetHero.GetComponent<FirstPerson.FirstPersonController>();
+                    if (player != null)
+                    {
+                        player.Kill();
+                    }
+                }
+                nav.speed = 0;
             }
-            else
-            {
-                //animator.SetTrigger("creature1roar");
-                animator.SetTrigger("creature1run");
-            }
+
+
+            
             // If the the last personal sighting of the player is not close...
             //if (sightingDeltaPos.sqrMagnitude > 4f)
             //    // ... set the destination for the NavMeshAgent to the last personal sighting of the player.
@@ -79,7 +86,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // Set the appropriate speed for the NavMeshAgent.
             //nav.speed = chaseSpeed;
- 
+
             //// If near the last personal sighting...
             //if (nav.remainingDistance < nav.stoppingDistance)
             //{
@@ -98,32 +105,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //    chaseTimer = 0f;
         }
 
-        //private void Update()
-        //{
-        //    switch (moveState)
-        //    {
-        //        case MoveState.Follow:
-        //            if (target != null)
-        //            {
-        //                agent.SetDestination(target.position);
-        //                character.Move(agent.desiredVelocity, false, false);
-        //            }
-        //            else
-        //            {
-        //                character.Move(Vector3.zero, false, false);
-        //            }
-        //            break;
-        //        case MoveState.Stand:
-        //            agent.SetDestination(Vector3.zero);
-        //            character.Move(Vector3.zero, false, false);
-        //            break;
-        //    }
-        //}
-
         void Patrolling()
         {
             nav.speed = patrolSpeed;
-            if (nav.remainingDistance <= nav.stoppingDistance)
+            //if (Vector3.Distance(destination, target.position) > 1.0f)
+            //{
+            //    destination = target.position;
+            //    agent.destination = destination;
+            //}
+            if(Vector3.Distance(nav.nextPosition, nav.destination) < 1.0f)
             {
                 // ... increment the wayPointIndex.
                 if (wayPointIndex == patrolWayPoints.Length - 1)
@@ -133,23 +123,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
              nav.destination = patrolWayPoints[wayPointIndex].position;
         }
-
     
         // Update is called once per frame
         private void Update()
         {
-            //character.Move(nav.desiredVelocity, false, false);
-
-            // If the player is in sight and is alive...
-            if (enemySight.playerInSight)
-                Chasing();
-            else
-                Patrolling();
+            if(isEscaping)
+            {
+                Escape();
+            } else {
+                // If the player is in sight and is alive...
+                if (enemySight.playerInSight)
+                    Chasing();
+                else
+                    Patrolling();
+            }
         }
 
-        //public void SetTarget(Transform target)
-        //{
-        //    this.target = target;
-        //}
+        private void Escape()
+        {
+            nav.speed = chaseSpeed;
+            wayPointIndex = 0;
+            nav.destination = patrolWayPoints[wayPointIndex].position;
+            if (Vector3.Distance(nav.nextPosition, nav.destination) < 1.0f)
+            {
+                enemySight.targetHero = null;
+                enemySight.playerInSight = false;
+                isEscaping = false; //go back to patrolling
+            }
+        }
+
+
+        public void HitByFlashlight()
+        {
+            isEscaping = true;
+ 
+        }
     }
 }

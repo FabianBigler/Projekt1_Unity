@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class FlashLight : MonoBehaviour {
 
@@ -64,8 +65,8 @@ void  Update (){
 	    flashlightLightSource.GetComponent<Light>().intensity = 0;
         //TODO: Trigger Death
 	}
-	
-	barDisplay = batteryLife;
+
+    barDisplay = batteryLife;
 	
 	if(batteryLife <= 0)
 	{
@@ -73,7 +74,7 @@ void  Update (){
 		lightOn = false;
 	}
 	
-	if(Input.GetKeyUp(KeyCode.F))
+	if(Input.GetKeyDown(KeyCode.F))
 	{
 		toggleFlashlight();
 		toggleFlashlightSFX();
@@ -87,7 +88,32 @@ void  Update (){
 			lightOn = true;
 		}
 	}
-}
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(flashlightLightSource.transform.position, Vector3.forward, out hit))
+        //{
+        //    if (hit.collider.gameObject.tag == "Monster")
+        //    {
+        //            var monster = hit.collider.gameObject.GetComponent<MonsterAI>();
+        //            monster.HitByFlashlight();
+
+        //    }
+        //}
+        
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0F));
+        RaycastHit hit; 
+        if(lightOn)
+        {
+            if (Physics.Raycast(ray, out hit, 50) && hit.collider.tag == "Enemy")
+            {
+                GameObject Monster = hit.transform.gameObject;
+                var player = GameObject.FindGameObjectsWithTag("Hero");
+                Debug.Log("Monster hit!");
+                var monster = Monster.GetComponent<MonsterAI>();
+                monster.HitByFlashlight();
+            }
+        }
+    }
 	
 
 void  OnGUI (){

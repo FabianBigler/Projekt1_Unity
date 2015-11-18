@@ -1,8 +1,3 @@
-////////////////////////////////////
-//Last edited by: Alexander Ameye //
-//on: Friday, 14/08/2015          //
-////////////////////////////////////
-
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -17,6 +12,7 @@ public class RayCasting : MonoBehaviour
 
 	//DEBUGGING
 	public Color DebugRayColor = Color.red;
+    public string GameTagCollider;
 
 	//START FUNCTION
 	void Start()
@@ -33,7 +29,7 @@ public class RayCasting : MonoBehaviour
 		RaycastHit hit; // Variable reading information about the collider hit.
 
 		// Cast a ray from the center of screen towards where the player is looking.
-		if (Physics.Raycast (ray, out hit, Reach) && hit.collider.tag == "Door")
+		if (Physics.Raycast (ray, out hit, Reach) && hit.collider.tag == GameTagCollider)
 		{
 			InReach = true;
 

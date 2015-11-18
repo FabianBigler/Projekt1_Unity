@@ -18,15 +18,18 @@ public class JumpScareTrig : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!trig)
+        if(other.tag.Equals("Hero"))
         {
-            trig = true;
-            ScarePane.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z - 10);
-            ScarePane.GetComponent<Renderer>().enabled = true;
-            GetComponent<AudioSource>().Play();
-            var control = AiController.GetComponent<AICharacterControl>();
-            control.characterState.Scare(control);
-            Destroy(ScarePane, 1f);
+            if (!trig)
+            {
+                trig = true;
+                ScarePane.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z - 10);
+                ScarePane.GetComponent<Renderer>().enabled = true;
+                GetComponent<AudioSource>().Play();
+                var control = AiController.GetComponent<AICharacterControl>();
+                control.characterState.Scare(control);
+                Destroy(ScarePane, 1f);
+            }
         }
     }
 }

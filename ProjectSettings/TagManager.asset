@@ -8,6 +8,8 @@ TagManager:
   - Battery
   - Door
   - Hero
+  - NPCHero
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -107,9 +107,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             dialogService.ShowDialog(sender, message);
         }
 
-        public void Ask(string message)
+        public void Kill()
         {
-
+            dialogService.ShowDialog("Me", "Oh nooo...I failed!");
+            Application.LoadLevel("Menu");
         }
  
         private void PlayLandingSound()

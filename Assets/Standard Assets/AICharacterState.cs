@@ -29,6 +29,7 @@ public class AICharacterStateFollow : AICharacterState
     public override void Injure(AICharacterControl context)
     {
         context.SetState(new AICharacterStateStand());
+        context.playerController.Tell("Kelly", "This...thing hit me! I'm not feeling well...");
         context.IsInjured = true;
     }
 

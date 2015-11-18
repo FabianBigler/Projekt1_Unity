@@ -12,6 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target; // target to aim for
         public MoveState moveState;
+        public GameObject player;
         public AICharacterState characterState;
         public bool IsInjured { get; set; }
         public bool IsBlinded { get; set; }
@@ -21,6 +22,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private List<string> scaredAnswers;
         private List<string> deadAnswers;
         private List<string> blindedAnswers;
+
+        public FirstPerson.FirstPersonController playerController { get; private set; }
 
         // Use this for initialization
         private void Start()
@@ -48,6 +51,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             blindedAnswers.Add("That's not funny!");
             blindedAnswers.Add("You're pissing me off. Lead the way!");
             blindedAnswers.Add("Will you stop that now?");
+            playerController = player.GetComponent<FirstPerson.FirstPersonController>();    
         }
 
         public void SetState(AICharacterState newState)
