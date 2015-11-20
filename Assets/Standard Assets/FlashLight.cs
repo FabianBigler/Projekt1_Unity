@@ -107,7 +107,6 @@ void  Update (){
             if (Physics.Raycast(ray, out hit, 50) && hit.collider.tag == "Enemy")
             {
                 GameObject Monster = hit.transform.gameObject;
-                var player = GameObject.FindGameObjectsWithTag("Hero");
                 Debug.Log("Monster hit!");
                 var monster = Monster.GetComponent<MonsterAI>();
                 monster.HitByFlashlight();
