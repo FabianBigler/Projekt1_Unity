@@ -290,7 +290,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.CompareTag("Key"))
             {
-                
                 other.gameObject.SetActive(false);
                 inventory.AddItem(other.gameObject.tag);
                 questManager.LoadQuest(3);

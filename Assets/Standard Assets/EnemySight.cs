@@ -8,6 +8,7 @@ public class EnemySight : MonoBehaviour
     public bool playerInSight;                      // Whether or not the player is currently sighted.
   //  public Vector3 personalLastSighting;            // Last place this enemy spotted the player.
     public GameObject targetHero;
+    public bool onlyTargetNPC;
 
     private NavMeshAgent nav;                       // Reference to the NavMeshAgent component.
     private SphereCollider col;                     // Reference to the sphere collider trigger component.
@@ -19,12 +20,16 @@ public class EnemySight : MonoBehaviour
     private Vector3 previousSighting;               // Where the player was sighted last frame.
    
 
+
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         col = GetComponent<SphereCollider>();
         players = new List<GameObject>();
-        players.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
+        if (!onlyTargetNPC)
+        {
+            players.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
+        }
         players.AddRange(GameObject.FindGameObjectsWithTag("NPCHero"));
     }
 

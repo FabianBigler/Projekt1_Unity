@@ -28,11 +28,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
         public Transform patrolWayPoint1;
         public Transform patrolWayPoint2;
+        public bool onlyTargetNPC;
 
         // Use this for initialization
         private void Start()
         {
             enemySight = GetComponent<EnemySight>();
+            enemySight.onlyTargetNPC = onlyTargetNPC;
             nav = GetComponent<NavMeshAgent>();
             //player = GameObject.FindGameObjectWithTag("Hero").transform;
             animator = GetComponent<Animator>();
@@ -54,6 +56,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 animator.SetTrigger("creature1run");
                 nav.speed = chaseSpeed;
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+               
             } else
             {
                 animator.SetTrigger("creature1attack1");

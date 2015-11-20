@@ -14,7 +14,7 @@ public class EnterHouseTrig : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel("House");
+            Application.LoadLevel("HauntedHouse");
             controller.LoadQuest(4);
         }
     }
