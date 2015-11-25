@@ -35,7 +35,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             SetState(new AICharacterStateFollow());
             agent.updateRotation = false;
 	        agent.updatePosition = true;
-
+           
             defaultAnswers = new List<string>();
             defaultAnswers.Add("Hey, we need to hurry! Kelly is in danger!");
             defaultAnswers.Add("Don't you dare thinking about touching me, we got more pressing matters to attend to!");

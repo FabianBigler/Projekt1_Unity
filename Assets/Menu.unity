@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56995302414e60b4188f7649d049096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLevel: HauntedHouse
+  startLevel: Forest
 --- !u!4 &1837149779
 Transform:
   m_ObjectHideFlags: 0
