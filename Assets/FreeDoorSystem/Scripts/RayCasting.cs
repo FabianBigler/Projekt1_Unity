@@ -35,17 +35,20 @@ public class RayCasting : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.E))
 			{
-				// Give the object that was hit the name 'Door'.
-				GameObject Door = hit.transform.gameObject;
+                // Give the object that was hit the name 'Door'.
+                //GameObject Door = hit.transform.gameObject;
 
-				// Get access to the 'DoorOpening' script attached to the door that was hit.
-				DoorOpening dooropening = Door.GetComponent<DoorOpening>();
+                // Get access to the 'DoorOpening' script attached to the door that was hit.
+                //DoorOpening dooropening = Door.GetComponent<DoorOpening>();
+
+                DoorOpening dooropening = hit.transform.gameObject.GetComponent<DoorOpening>();
 
 				// Check whether the door is opening/closing or not.
 				if (dooropening.Running == false)
 				{
-					// Open/close the door by running the 'Open' function in the 'DoorOpening' script.
-					StartCoroutine (hit.collider.GetComponent<DoorOpening>().Open());
+                    // Open/close the door by running the 'Open' function in the 'DoorOpening' script.
+                    //StartCoroutine (hit.collider.GetComponent<DoorOpening>().Open());
+                    StartCoroutine(dooropening.Open());
 				}
 			}
 		}

@@ -10,6 +10,7 @@ TagManager:
   - Hero
   - NPCHero
   - Enemy
+  - raisableObject
   layers:
   - Default
   - TransparentFX
