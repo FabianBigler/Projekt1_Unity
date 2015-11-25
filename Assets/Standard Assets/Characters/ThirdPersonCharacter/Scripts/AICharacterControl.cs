@@ -10,7 +10,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     {
         public NavMeshAgent agent { get; private set; } // the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Transform target; // target to aim for
+       // public Transform target; // target to aim for
         public MoveState moveState;
         public GameObject player;
         public AICharacterState characterState;
@@ -42,8 +42,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             defaultAnswers.Add("What's up?");
             defaultAnswers.Add("What are you looking at?");
             scaredAnswers = new List<string>();
-            scaredAnswers.Add("I'm so scared!");
-            scaredAnswers.Add("Please don't leave me alone!");
+            scaredAnswers.Add("Thanks for talking to me.");
+            scaredAnswers.Add("OK, blast it. Let's find our daughter!");
             deadAnswers = new List<string>();
             deadAnswers.Add("You failed me!");
             deadAnswers.Add("Go away!");
@@ -65,9 +65,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             switch(moveState)
             {
                 case MoveState.Follow:
-                    if (target != null)
+                    if (player != null)
                     {
-                        agent.SetDestination(target.position);
+                        agent.SetDestination(player.transform.position);
                         character.Move(agent.desiredVelocity, false, false);
                     }
                     else
@@ -111,9 +111,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             return answers[randIndex];
         }
 
-        public void SetTarget(Transform target)
+        //public void SetTarget(Transform target)
+        //{
+        //    this.target = target;
+        //}
+
+        void OnTriggerStay(Collider other)
         {
-            this.target = target;
+            var player = other.gameObject.GetComponent<FirstPerson.FirstPersonController>();
+            if (player != null)
+            {
+                moveState = MoveState.Stand;
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            var player = other.gameObject.GetComponent<FirstPerson.FirstPersonController>();
+            if (player != null)
+            {
+                if(!IsScared)
+                {
+                    moveState = MoveState.Follow;
+                }
+            }
         }
     }
 

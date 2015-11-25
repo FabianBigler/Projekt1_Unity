@@ -28,6 +28,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Transform[] patrolWayPoints;                     // An array of transforms for the patrol route.
         public Transform patrolWayPoint1;
         public Transform patrolWayPoint2;
+        public Transform escapeWayPoint1 = null;
         public bool onlyTargetNPC;
 
         // Use this for initialization
@@ -61,7 +62,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                
             } else
             {
-                animator.SetTrigger("creature1attack1");
+                animator.SetTrigger("creature1attack2");
                 if(enemySight.targetHero.tag.Equals("NPCHero"))
                 {
                     var aiControl = enemySight.targetHero.GetComponent<AICharacterControl>();
@@ -69,6 +70,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     {
                         aiControl.characterState.Injure(aiControl);
                     }
+                    isEscaping = true;
                 }
                 
                 if(enemySight.targetHero.tag.Equals("Hero"))
@@ -148,7 +150,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             nav.speed = chaseSpeed;
             wayPointIndex = 0;
-            nav.destination = patrolWayPoints[wayPointIndex].position;
+
+            if(escapeWayPoint1 != null)
+            {
+                nav.destination = escapeWayPoint1.position;
+            } else
+            {
+                nav.destination = patrolWayPoints[wayPointIndex].position;
+            }
+            
             if (Vector3.Distance(nav.nextPosition, nav.destination) < 1.0f)
             {
                 enemySight.targetHero = null;
@@ -160,8 +170,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void HitByFlashlight()
         {
-            isEscaping = true;
- 
+            //immune to flashlight!
+            if(!onlyTargetNPC)
+            {
+                isEscaping = true;
+            }
         }
     }
 }

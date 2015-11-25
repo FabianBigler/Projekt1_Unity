@@ -15,6 +15,11 @@ public abstract class AICharacterState {
     public virtual void Abandon(AICharacterControl context) { }
 
     public virtual void TalkTo(AICharacterControl context) { }
+
+    public virtual void Kill(AICharacterControl context) {
+        context.SetState(new AICharacterStateDead());
+        context.playerController.Tell("Kelly", "I'm...sorry...I...failed...");
+    }
 }
 
 
@@ -37,7 +42,9 @@ public class AICharacterStateFollow : AICharacterState
     {
         context.SetState(new AICharacterStateStand());
         context.IsScared = true;
+        context.playerController.Tell("Kelly", "Oh...I'm so scared");
         context.moveState = MoveState.Stand;
+        
     }
 
     public override void TalkTo(AICharacterControl context)
@@ -65,6 +72,7 @@ public class AICharacterStateStand : AICharacterState
     public override void TalkTo(AICharacterControl context)
     {
         context.SetState(new AICharacterStateFollow());
+        context.IsScared = false;
         context.moveState = MoveState.Follow;
     }
 }
