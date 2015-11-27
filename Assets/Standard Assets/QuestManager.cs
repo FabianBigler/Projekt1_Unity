@@ -15,6 +15,7 @@ public class QuestManager {
         quests.Add(2, "The door is locked. Find the key!");
         quests.Add(3, "You found the key! Enter the house.");
         quests.Add(4, "Find your daughter Kelly!");
+        quests.Add(5, "You found the {0} key! Go find the {0} room!");
     }
 
 	// Update is called once per frame
@@ -24,5 +25,10 @@ public class QuestManager {
     public void LoadQuest(int questID)
     {
         questTxt.text = quests[questID];
+    }
+
+    public void LoadQuest(int questID, string key)
+    {
+        questTxt.text = string.Format(quests[questID], key);
     }
 }

@@ -14,6 +14,13 @@ TagManager:
   - AICorpse
   - AIBody
   - Torch
+  - Key_blue
+  - Key_red
+  - Key_green
+  - Key_yellow
+  - Key_black
+  - Key_white
+  - Key_master
   layers:
   - Default
   - TransparentFX

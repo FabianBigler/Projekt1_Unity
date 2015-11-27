@@ -301,32 +301,47 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         void OnTriggerEnter(Collider other)
         {
-            switch(other.gameObject.tag)
+            if(other.gameObject.tag.StartsWith("Key"))
             {
-                case "Key":
-                    other.gameObject.SetActive(false);
-                    inventory.AddItem(other.gameObject.tag);
+                other.gameObject.SetActive(false);
+                inventory.AddItem(other.gameObject.tag);
+
+                var sp = other.gameObject.tag.Split('_');
+                //load quest depending on picked up key
+                if (sp.Length == 1)
+                {
                     questManager.LoadQuest(3);
-                    break;
-                case "Battery":
-                    other.gameObject.SetActive(false);
-                    var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
-                    var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");
-                    var flashLight = flashLightGameObj.GetComponent<FlashLight>();
-                    flashLight.Recharge();
-                    inventory.AddItem(other.gameObject.tag);
-                    break;
-                case "Torch":
-                    if(inventory.GetItem("Torch") == null)
-                    {
+                }
+                else
+                {
+                    Debug.Log("Found key");
+                    questManager.LoadQuest(5, sp[1]);
+                }
+            }
+            else
+            {
+                switch (other.gameObject.tag)
+                {
+                    case "Battery":
                         other.gameObject.SetActive(false);
+                        var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
+                        var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");
+                        var flashLight = flashLightGameObj.GetComponent<FlashLight>();
+                        flashLight.Recharge();
                         inventory.AddItem(other.gameObject.tag);
-                        if (torch != null)
+                        break;
+                    case "Torch":
+                        if (inventory.GetItem("Torch") == null)
                         {
-                            torch.SetActive(true);
+                            other.gameObject.SetActive(false);
+                            inventory.AddItem(other.gameObject.tag);
+                            if (torch != null)
+                            {
+                                torch.SetActive(true);
+                            }
                         }
-                    }
-                   break;
+                        break;
+                }
             }
         }
     }

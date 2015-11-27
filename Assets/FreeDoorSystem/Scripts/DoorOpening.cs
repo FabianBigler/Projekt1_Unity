@@ -27,6 +27,7 @@ public class DoorOpening : MonoBehaviour {
 	public float Angle = 90.0F; // Only use positive angles <180°.
 	public float Speed = 3F; // Opening/closing speed of the door.
 	public int TimesOpenable = 0; // 0 = infinite.
+    public string AcceptKeyTag;
 
 	//PRIVATE SETTINGS
 	private int n = 0;
