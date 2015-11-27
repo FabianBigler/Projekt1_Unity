@@ -6,16 +6,19 @@ public class EnterHouseTrig : MonoBehaviour {
     public GameObject hero;
     void OnTriggerEnter(Collider other)
     {
-        var controller = other.gameObject.GetComponent<FirstPersonController>();
-        var item = (controller.inventory != null ? controller.inventory.GetItem("Key") : null);
-        if (item == null)
+        if(other.CompareTag("Hero"))
         {
-            controller.LoadQuest(2);
-        }
-        else
-        {
-            Application.LoadLevel("HauntedHouse");
-            controller.LoadQuest(4);
+            var controller = other.gameObject.GetComponent<FirstPersonController>();
+            var item = (controller.inventory != null ? controller.inventory.GetItem("Key") : null);
+            if (item == null)
+            {
+                controller.LoadQuest(2);
+            }
+            else
+            {
+                Application.LoadLevel("HauntedHouse");
+                controller.LoadQuest(4);
+            }
         }
     }
    

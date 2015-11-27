@@ -52,6 +52,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private DialogService dialogService;
         public Inventory inventory;
 
+        private GameObject torch;
+
         // Use this for initialization
         private void Start()
         {
@@ -66,10 +68,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
             questManager = new QuestManager(QuestText);
-            questManager.LoadQuest(1);
+            questManager.LoadQuest(m_CurrentMainQuestID);
             dialogService = new DialogService(DialogText);
             inventory = new Inventory();
             inventory.AddItem("FlashLight");
+            
+            
+            //scene haunted house
+            if(m_CurrentMainQuestID >= 4)
+            {
+                torch = transform.Find("Torch").gameObject;
+                if (torch != null)
+                {
+                    torch.SetActive(false);
+                }
+            }
         }
 
         // Update is called once per frame
@@ -155,7 +168,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
-            NPCTarget.transform.Translate(m_MoveDir * Time.fixedDeltaTime);
+            //NPCTarget.transform.Translate(m_MoveDir * Time.fixedDeltaTime);
 
 
             ProgressStepCycle(speed);
@@ -288,20 +301,32 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Key"))
+            switch(other.gameObject.tag)
             {
-                other.gameObject.SetActive(false);
-                inventory.AddItem(other.gameObject.tag);
-                questManager.LoadQuest(3);
-            }
-            if (other.gameObject.CompareTag("Battery"))
-            {
-                other.gameObject.SetActive(false);
-                var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
-                var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");
-                var flashLight = flashLightGameObj.GetComponent<FlashLight>();
-                flashLight.Recharge();                
-                inventory.AddItem(other.gameObject.tag);
+                case "Key":
+                    other.gameObject.SetActive(false);
+                    inventory.AddItem(other.gameObject.tag);
+                    questManager.LoadQuest(3);
+                    break;
+                case "Battery":
+                    other.gameObject.SetActive(false);
+                    var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
+                    var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");
+                    var flashLight = flashLightGameObj.GetComponent<FlashLight>();
+                    flashLight.Recharge();
+                    inventory.AddItem(other.gameObject.tag);
+                    break;
+                case "Torch":
+                    if(inventory.GetItem("Torch") == null)
+                    {
+                        other.gameObject.SetActive(false);
+                        inventory.AddItem(other.gameObject.tag);
+                        if (torch != null)
+                        {
+                            torch.SetActive(true);
+                        }
+                    }
+                   break;
             }
         }
     }
