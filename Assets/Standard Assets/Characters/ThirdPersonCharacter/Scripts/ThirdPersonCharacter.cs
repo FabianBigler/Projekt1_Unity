@@ -114,7 +114,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
-
+    
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters

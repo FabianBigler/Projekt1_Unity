@@ -23,11 +23,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private List<string> deadAnswers;
         private List<string> blindedAnswers;
 
+        public GameObject Skeleton;
+        public GameObject Body;
+        
+
         public FirstPerson.FirstPersonController playerController { get; private set; }
 
         // Use this for initialization
         private void Start()
-        {
+        {           
+            Skeleton = GameObject.FindGameObjectWithTag("AICorpse");
+            Skeleton.SetActive(false);
+            Body = GameObject.FindGameObjectWithTag("AIBody");
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
@@ -35,7 +42,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             SetState(new AICharacterStateFollow());
             agent.updateRotation = false;
 	        agent.updatePosition = true;
-           
+            //GetComponent<skeleton>();
+
             defaultAnswers = new List<string>();
             defaultAnswers.Add("Hey, we need to hurry! Kelly is in danger!");
             defaultAnswers.Add("Don't you dare thinking about touching me, we got more pressing matters to attend to!");
@@ -130,7 +138,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             var player = other.gameObject.GetComponent<FirstPerson.FirstPersonController>();
             if (player != null)
             {
-                if(!IsScared)
+                if(!IsScared && !IsDead)
                 {
                     moveState = MoveState.Follow;
                 }

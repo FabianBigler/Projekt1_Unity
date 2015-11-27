@@ -17,8 +17,12 @@ public abstract class AICharacterState {
     public virtual void TalkTo(AICharacterControl context) { }
 
     public virtual void Kill(AICharacterControl context) {
+        context.IsDead = true;
         context.SetState(new AICharacterStateDead());
         context.playerController.Tell("Kelly", "I'm...sorry...I...failed...");
+        context.Skeleton.SetActive(true);
+        context.Body.SetActive(false);
+        context.moveState = MoveState.Stand;
     }
 }
 

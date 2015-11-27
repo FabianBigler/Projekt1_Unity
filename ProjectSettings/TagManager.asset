@@ -11,6 +11,8 @@ TagManager:
   - NPCHero
   - Enemy
   - raisableObject
+  - AICorpse
+  - AIBody
   layers:
   - Default
   - TransparentFX

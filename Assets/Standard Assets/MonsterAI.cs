@@ -68,7 +68,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     var aiControl = enemySight.targetHero.GetComponent<AICharacterControl>();
                     if (aiControl != null)
                     {
-                        aiControl.characterState.Injure(aiControl);
+                        aiControl.characterState.Kill(aiControl);
                     }
                     isEscaping = true;
                 }
