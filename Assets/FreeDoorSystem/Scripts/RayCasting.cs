@@ -43,13 +43,15 @@ public class RayCasting : MonoBehaviour
 
                 DoorOpening dooropening = hit.transform.gameObject.GetComponent<DoorOpening>();
 
-				// Check whether the door is opening/closing or not.
-				if (dooropening.Running == false)
-				{
-                    // Open/close the door by running the 'Open' function in the 'DoorOpening' script.
-                    //StartCoroutine (hit.collider.GetComponent<DoorOpening>().Open());
-                    StartCoroutine(dooropening.Open());
-				}
+                    // Check whether the door is opening/closing or not.
+                    if (dooropening.Running == false)
+                    {
+                        if(dooropening.Unlock)
+                        {
+                           StartCoroutine(dooropening.Open());
+                        }
+                    }
+                
 			}
 		}
 

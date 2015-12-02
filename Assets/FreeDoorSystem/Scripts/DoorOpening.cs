@@ -6,6 +6,8 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
+using System;
 
 public class DoorOpening : MonoBehaviour {
 
@@ -32,9 +34,11 @@ public class DoorOpening : MonoBehaviour {
 	//PRIVATE SETTINGS
 	private int n = 0;
 	[HideInInspector] public bool Running = false;
+    private GameObject player;
+    private FirstPersonController playerController;
 
-	// Define two end rotations for state 0 and 1.
-	private Quaternion EndRot1, EndRot2;
+    // Define two end rotations for state 0 and 1.
+    private Quaternion EndRot1, EndRot2;
 	private int State;
 
 	// Create a hinge.
@@ -47,8 +51,11 @@ public class DoorOpening : MonoBehaviour {
 		hinge = new GameObject();
 		hinge.name = "hinge";
 
-		// Calculate Cosine and Sine of initial angle.
-		float CosDeg = Mathf.Cos ((transform.eulerAngles.y * Mathf.PI) / 180);
+        player  = GameObject.Find("Player");
+        playerController = player.GetComponent<FirstPersonController>();
+
+        // Calculate Cosine and Sine of initial angle.
+        float CosDeg = Mathf.Cos ((transform.eulerAngles.y * Mathf.PI) / 180);
 		float SinDeg = Mathf.Sin ((transform.eulerAngles.y * Mathf.PI) / 180);
 
 		// Set side of hinge left.
@@ -125,15 +132,29 @@ public class DoorOpening : MonoBehaviour {
 		//else print ("The door is not opening/closing (Running = " + Running + ")");
 	}
 
+    public bool Unlock
+    {
+        get
+        {
+            if (String.IsNullOrEmpty(AcceptKeyTag)) return true;
+
+            var item = playerController.inventory.GetItem(AcceptKeyTag);   
+            if(item == null)
+            {
+                playerController.LoadQuest(2);
+                return false;
+            } else
+            {
+                playerController.inventory.RemoveItem(AcceptKeyTag);
+                return true;
+            }    
+        }
+    }
+
 	//OPEN FUNCTION
 	public IEnumerator Open ()
-  {
-
-		//DEBUGGING (TEST)
-		//if (Running == true) print ("The door is opening/closing (Running = " + Running + ")");
-		//else print ("The door is not opening/closing (Running = " + Running + ")");
-
-		if (n < TimesOpenable || TimesOpenable == 0)
+    {
+        if (n < TimesOpenable || TimesOpenable == 0)
 		{
 			if (hinge.transform.rotation == (State == 0 ? EndRot1 : EndRot2))
 			{
@@ -170,9 +191,8 @@ public class DoorOpening : MonoBehaviour {
 	//GUI FUNCTION
 	void OnGUI ()
 	{
-		//Access InReach variable from raycasting script.
-		GameObject Player = GameObject.Find("Player");
-		RayCasting raycasting = Player.GetComponent<RayCasting>();
+       // Player.GetComponent
+		RayCasting raycasting = player.GetComponent<RayCasting>();
 
 		if (raycasting.InReach == true)
 		{
