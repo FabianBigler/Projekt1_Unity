@@ -21,6 +21,8 @@ TagManager:
   - Key_black
   - Key_white
   - Key_master
+  - BarrelSocket1
+  - BarrelSocket2
   layers:
   - Default
   - TransparentFX
