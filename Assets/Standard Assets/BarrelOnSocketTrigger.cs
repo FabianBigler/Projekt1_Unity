@@ -7,9 +7,12 @@ public class BarrelOnSocketTrigger : MonoBehaviour
     public GameObject KeyToActivate;
 
     static List<string> barrelSockets;
+    private bool successTriggered;
+
     void Start()
     {
         barrelSockets = new List<string>();
+        successTriggered = false;
     }
     void OnTriggerStay(Collider other)
     {
@@ -25,8 +28,12 @@ public class BarrelOnSocketTrigger : MonoBehaviour
     {
         if(barrelSockets.Count == 2)
         {
-            Debug.Log("Mission completed!");
-            KeyToActivate.SetActive(true);
+            if(!successTriggered)
+            {
+                successTriggered = true;
+                Debug.Log("Mission completed!");
+                KeyToActivate.SetActive(true);
+            }
         }
     }
 
