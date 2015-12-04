@@ -1108,6 +1108,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 6, z: 6}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &37800224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 37800220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3406669ea54951740a9b9d55422394de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &41555731
 Prefab:
   m_ObjectHideFlags: 0
@@ -18742,7 +18753,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1001 &1012826610
 Prefab:
@@ -26844,6 +26855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e708a9616e14e4aabb8372772b1857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeyToActivate: {fileID: 37800220}
 --- !u!1 &1467930613 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 115752, guid: 731670d05affd0045a25600d2045889f, type: 2}
@@ -28913,7 +28925,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.61000013
+      value: .340000004
       objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalPosition.z
@@ -29440,6 +29452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e708a9616e14e4aabb8372772b1857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeyToActivate: {fileID: 37800220}
 --- !u!4 &1606969918 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: b2f96746c6005c64888263f64272a556, type: 2}
@@ -39461,6 +39474,10 @@ Prefab:
     - target: {fileID: 100000, guid: 36f258ea05b6e8644ae91a5b98eba017, type: 2}
       propertyPath: m_Name
       value: Barrel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471614, guid: 36f258ea05b6e8644ae91a5b98eba017, type: 2}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 36f258ea05b6e8644ae91a5b98eba017, type: 2}
