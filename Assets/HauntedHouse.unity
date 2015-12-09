@@ -2865,15 +2865,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 31.4899998
+      value: 56.4099998
       objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .410000086
+      value: 3.82999992
       objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .913999975
+      value: 11.8999996
       objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2919,6 +2919,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c38b8a9e8af35414cb457deb56be083d, type: 2}
+    - target: {fileID: 170560, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc5de5e674870ca479a40105f80555ad, type: 2}
   m_IsPrefabParent: 0
@@ -5276,6 +5280,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2f96746c6005c64888263f64272a556, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &246536756 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: ce73a35450ff20d4ab05c1f0c3cec2dc, type: 2}
+  m_PrefabInternal: {fileID: 266317345}
+--- !u!65 &246536757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 246536756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75999999, y: 5.80163765, z: 5.85976982}
+  m_Center: {x: -.449999988, y: 2.90081739, z: 0}
+--- !u!114 &246536758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 246536756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d52b0ddbf6750149b3369bb0e0dc117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeyToActivate: {fileID: 1832345887}
 --- !u!1001 &250480549
 Prefab:
   m_ObjectHideFlags: 0
@@ -5769,6 +5801,10 @@ Prefab:
       propertyPath: m_Name
       value: Wall_B (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 2319412, guid: ce73a35450ff20d4ab05c1f0c3cec2dc, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e43a2ddb3856114fb3ee1fc42a89223, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce73a35450ff20d4ab05c1f0c3cec2dc, type: 2}
   m_IsPrefabParent: 0
@@ -29845,7 +29881,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.80014038, y: 15, z: 5.85690308}
+  m_Size: {x: 5.80014038, y: 1.5, z: 5.85690308}
   m_Center: {x: 0, y: -.296067238, z: 1.90734863e-06}
 --- !u!114 &1465933919
 MonoBehaviour:
@@ -32629,7 +32665,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.80014038, y: 15, z: 5.85690308}
+  m_Size: {x: 5.80014038, y: 1.5, z: 5.85690308}
   m_Center: {x: 0, y: -.296067238, z: 1.90734863e-06}
 --- !u!114 &1601238458
 MonoBehaviour:
@@ -41998,6 +42034,10 @@ Prefab:
       propertyPath: m_TagString
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: keyPickupSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 29a525b094164ce4899ea37194b5a0fa, type: 3}
     m_RemovedComponents:
     - {fileID: 8100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
