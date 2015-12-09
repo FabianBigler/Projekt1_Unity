@@ -54,6 +54,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private GameObject torch;
 
+        [SerializeField]
+        private AudioClip keyPickupSound;
+
         // Use this for initialization
         private void Start()
         {
@@ -305,6 +308,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 other.gameObject.SetActive(false);
                 inventory.AddItem(other.gameObject.tag);
+                m_AudioSource.clip = keyPickupSound;
+                m_AudioSource.Play();
+                
 
                 var sp = other.gameObject.tag.Split('_');
                 //load quest depending on picked up key
