@@ -23,6 +23,7 @@ TagManager:
   - Key_master
   - BarrelSocket1
   - BarrelSocket2
+  - pushable
   layers:
   - Default
   - TransparentFX
