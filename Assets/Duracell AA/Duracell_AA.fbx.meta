@@ -12,6 +12,8 @@ ModelImporter:
     100008: Lamp
     100010: Lamp.001
     100012: Plane
+    100014: lyingBattery
+    100016: standingBattery
     400000: Camera
     400002: Cylinder
     400004: Cylinder.001
@@ -19,15 +21,23 @@ ModelImporter:
     400008: Lamp
     400010: Lamp.001
     400012: Plane
+    400014: lyingBattery
+    400016: standingBattery
     2300000: Cylinder
     2300002: Cylinder.001
     2300004: Plane
+    2300006: lyingBattery
+    2300008: standingBattery
     3300000: Cylinder
     3300002: Cylinder.001
     3300004: Plane
+    3300006: lyingBattery
+    3300008: standingBattery
     4300000: Cylinder.001
     4300002: Plane
     4300004: Cylinder
+    4300006: lyingBattery
+    4300008: standingBattery
   materials:
     importMaterials: 1
     materialName: 0
