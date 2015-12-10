@@ -74,7 +74,8 @@ void  Update (){
 		lightOn = false;
 	}
 	
-	if(Input.GetKeyDown(KeyCode.F))
+	//if(Input.GetKeyDown(KeyCode.F))
+    if(Input.GetButtonDown("Flashlight"))
 	{
 		toggleFlashlight();
 		toggleFlashlightSFX();
