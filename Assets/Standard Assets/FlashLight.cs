@@ -112,6 +112,12 @@ void  Update (){
                 var monster = Monster.GetComponent<MonsterAI>();
                 monster.HitByFlashlight();
             }
+            if (Physics.Raycast(ray, out hit, 50) && hit.collider.tag.StartsWith("LightWall"))
+            {
+                GameObject lightwall = hit.transform.gameObject;
+                var trigger = lightwall.GetComponent<LightWallTrigger>();
+                trigger.HitByFlashLight();               
+            }
         }
     }
 	

@@ -24,6 +24,9 @@ TagManager:
   - BarrelSocket1
   - BarrelSocket2
   - pushable
+  - LightWall1
+  - LightWall2
+  - LightWall3
   layers:
   - Default
   - TransparentFX
