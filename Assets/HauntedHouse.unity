@@ -30963,8 +30963,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlightLightSource: {fileID: 0}
   lightOn: 1
-  lightDrain: 0.1
-  maxBatteryLife: 2
+  lightDrain: 0.01
+  maxBatteryLife: 1
   barDisplay: 0
   pos: {x: 20, y: 40}
   size: {x: 80, y: 40}
