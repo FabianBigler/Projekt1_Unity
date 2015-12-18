@@ -329,6 +329,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 switch (other.gameObject.tag)
                 {
                     case "Battery":
+                        Debug.Log("Picked up battery!");
                         other.gameObject.SetActive(false);
                         var firstPersonChar = this.transform.FindChild("FirstPersonCharacter");
                         var flashLightGameObj = firstPersonChar.transform.FindChild("Flashlight");

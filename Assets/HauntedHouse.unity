@@ -16261,7 +16261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16306,6 +16306,14 @@ Prefab:
     - target: {fileID: 100006, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
       propertyPath: m_TagString
       value: Battery
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400014, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb2d14e92bc4d5742996da66735b6adc, type: 3}
@@ -43159,7 +43167,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 226.81
+      value: 249.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -43167,7 +43175,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 48.77
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalRotation.x
