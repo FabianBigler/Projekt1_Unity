@@ -14,6 +14,7 @@ public class RayCastRaisableObject : MonoBehaviour
 	public Color DebugRayColor = Color.red;
     public string GameTagCollider;
     private GameObject hitObject;
+    float distance=0;
 
     //START FUNCTION
     void Start()
@@ -25,6 +26,12 @@ public class RayCastRaisableObject : MonoBehaviour
 	void Update()
 	{
 		Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5F, 0.5F, 0F));
+
+        if (hitObject != null)
+        {
+            distance = Vector3.Distance(gameObject.transform.position, hitObject.transform.position);
+        }
+
 
         if (Input.GetMouseButtonDown(0))
 		{
@@ -45,11 +52,12 @@ public class RayCastRaisableObject : MonoBehaviour
             }
 
         }
-        if (Input.GetMouseButtonUp(0)) // This will release the object 
+        if (Input.GetMouseButtonUp(0) || distance >5) // This will release the object 
         {
             if(hitObject!= null) hitObject.GetComponent<Rigidbody>().useGravity = true;
             hitObject.transform.parent = null;
             hitObject = null;
+            distance = 0;
 
             //var p = hitObject.transform.position;
             //hitObject.transform.position = new Vector3(p.x, p.y - 1, p.z);
