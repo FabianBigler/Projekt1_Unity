@@ -17,18 +17,18 @@ ganzes Herbstsemester 2015
 ### Aufgabenbeschreibung
 gemäss: https://staff.hti.bfh.ch/swp1/Projekt_1/projects.html
 
-> ID: 11 
-> Titel: Game – Adventure Game mit der Unity Game Engine
+> **ID:** 11 
+> **Titel:** Game – Adventure Game mit der Unity Game Engine
 > 
-> Beschreibung: In dieser Arbeit soll ein Adventure Game mit Hilfe der 3D-Game Engine Unity erstellt werden. Die Unity Game Engine ermöglicht einen schnellen Zugang in die Spielentwicklung, einerseits bietet es eine eigene Entwicklungsumgebung für Java Script und C#, andererseits gibt es auf dem Netz viele Tutorials, die den Einstieg erleichtern.
+> **Beschreibung:** In dieser Arbeit soll ein Adventure Game mit Hilfe der 3D-Game Engine Unity erstellt werden. Die Unity Game Engine ermöglicht einen schnellen Zugang in die Spielentwicklung, einerseits bietet es eine eigene Entwicklungsumgebung für Java Script und C#, andererseits gibt es auf dem Netz viele Tutorials, die den Einstieg erleichtern.
 > 
-> Gruppengrösse: 2-3
+> **Gruppengrösse:** 2-3
 > 
-> Anzuwendende Technologien: Unity Game Engine, Java Script oder C#
+> **Anzuwendende Technologien:** Unity Game Engine, Java Script oder C#
 > 
-> Links:
+> **Links:**
 > 
-> Betreuer: Jürgen Eckerle
+> **Betreuer:** Jürgen Eckerle
 
 
 ## Levels und deren Inhalt
