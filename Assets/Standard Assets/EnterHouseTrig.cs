@@ -4,6 +4,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class EnterHouseTrig : MonoBehaviour {
     public GameObject hero;
+    public string nextLevel = "L1_HauntedHouse";
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Hero"))
@@ -16,7 +17,7 @@ public class EnterHouseTrig : MonoBehaviour {
             }
             else
             {
-                Application.LoadLevel("HauntedHouse");
+                Application.LoadLevel(nextLevel);
                 controller.LoadQuest(4);
             }
         }

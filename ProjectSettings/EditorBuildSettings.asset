@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Menu.unity
+    path: Assets/L0_Menu.unity
   - enabled: 1
-    path: Assets/Forest.unity
+    path: Assets/L1_Forest.unity
   - enabled: 1
-    path: Assets/HauntedHouse.unity
+    path: Assets/L2_HauntedHouse.unity
