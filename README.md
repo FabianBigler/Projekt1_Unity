@@ -1,8 +1,8 @@
-BFH-Projekt1 
-==============
+# BTI7301pq - Projekt 1
 
-Allgemeine Informationen
-------------------------
+
+## Allgemeine Informationen
+
 ### Gruppenmitglieder
 Bigler Fabian (fabianmathias.bigler@students.bfh.ch)
 Kilchhofer Marco (marco.kilchhofer@students.bfh.ch)  
@@ -14,13 +14,28 @@ Eckerle Jürgen Dr. (juergen.eckerle@bfh.ch)
 ### Projektdauer
 ganzes Herbstsemester 2015
 
+### Aufgabenbeschreibung
+gemäss: https://staff.hti.bfh.ch/swp1/Projekt_1/projects.html
 
-Levels und deren Inhalt
----------------------------
+> ID: 11 
+> Titel: Game – Adventure Game mit der Unity Game Engine
+> 
+> Beschreibung: In dieser Arbeit soll ein Adventure Game mit Hilfe der 3D-Game Engine Unity erstellt werden. Die Unity Game Engine ermöglicht einen schnellen Zugang in die Spielentwicklung, einerseits bietet es eine eigene Entwicklungsumgebung für Java Script und C#, andererseits gibt es auf dem Netz viele Tutorials, die den Einstieg erleichtern.
+> 
+> Gruppengrösse: 2-3
+> 
+> Anzuwendende Technologien: Unity Game Engine, Java Script oder C#
+> 
+> Links:
+> 
+> Betreuer: Jürgen Eckerle
 
-### L0 : menu
+
+## Levels und deren Inhalt
+
+### Level 0: menu
 Auswählen zwischen Spiel starten und Spiel beenden
-### L1 : forest 
+### Level 1: forest 
 suchen des Hauses
-### L2 : haunted house 
+### Level 2: haunted house 
 suchen der Tochter Kelly
