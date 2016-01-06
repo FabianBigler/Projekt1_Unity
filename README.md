@@ -1,7 +1,9 @@
-# Projekt1_Unity 
+BFH-Projekt1 
+==============
 
 Levels
-================
-L0 : menu 
-L1 : forest 
-L2 : haunted house 
+------
+
+- L0 : menu
+- L1 : forest 
+- L2 : haunted house 
