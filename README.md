@@ -4,7 +4,7 @@
 ## Allgemeine Informationen
 
 ### Gruppenmitglieder
-Bigler Fabian (fabianmathias.bigler@students.bfh.ch)
+Bigler Fabian (fabianmathias.bigler@students.bfh.ch)  
 Kilchhofer Marco (marco.kilchhofer@students.bfh.ch)  
 Schmutz Manuel (manuel.schmutz@students.bfh.ch)  
 
