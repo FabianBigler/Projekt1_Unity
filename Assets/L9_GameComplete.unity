@@ -118,7 +118,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95.7, y: -28.8}
+  m_AnchoredPosition: {x: -319, y: -37.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91503697
@@ -472,7 +472,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -66, y: -28.8}
+  m_AnchoredPosition: {x: -319, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637949760
@@ -626,7 +626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start Game
+  m_Text: Restart Game
 --- !u!222 &1759291067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 76a231c21d60a434581f6917125f3661, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af1194af401858f42ad9744c039c1971, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
