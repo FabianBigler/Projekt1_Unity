@@ -54,7 +54,10 @@ public class RayCastRaisableObject : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) || distance >5) // This will release the object 
         {
-            if(hitObject!= null) hitObject.GetComponent<Rigidbody>().useGravity = true;
+            if (hitObject != null)
+            {
+                hitObject.GetComponent<Rigidbody>().useGravity = true;
+            }
             hitObject.transform.parent = null;
             hitObject = null;
             distance = 0;

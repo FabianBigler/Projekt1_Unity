@@ -15,9 +15,9 @@ public class FloorGravityTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered!");
         if(other.CompareTag("Hero"))
         {
+            Debug.Log("FloorGravityTrigger entered!");
             Debug.Log("It should fall down now *cough*");
             GetComponent<Rigidbody>().useGravity = true;
         }
