@@ -27,6 +27,10 @@ TagManager:
   - LightWall1
   - LightWall2
   - LightWall3
+  - UnlitTorch1
+  - UnlitTorch2
+  - UnlitTorch3
+  - UnlitTorch4
   layers:
   - Default
   - TransparentFX
