@@ -190,17 +190,4 @@ public class DoorOpening : MonoBehaviour {
 			//print("Door was moved " + n + " times.");
 		}
 	}
-
-	//GUI FUNCTION
-	void OnGUI ()
-	{
-       // Player.GetComponent
-		RayCasting raycasting = player.GetComponent<RayCasting>();
-
-		if (raycasting.InReach == true)
-		{
-			GUI.color = Color.white;
-			GUI.Box(new Rect(20, 20, 200, 25), "Press 'E' to open/close");
-		}
-	}
 }

@@ -31,6 +31,8 @@ TagManager:
   - UnlitTorch2
   - UnlitTorch3
   - UnlitTorch4
+  - UnlitTorch
+  - JailDoor
   layers:
   - Default
   - TransparentFX

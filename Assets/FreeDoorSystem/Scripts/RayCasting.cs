@@ -12,7 +12,8 @@ public class RayCasting : MonoBehaviour
 
 	//DEBUGGING
 	public Color DebugRayColor = Color.red;
-    public string GameTagCollider;
+    Animator animator;
+    bool jailDoorOpen;
 
 	//START FUNCTION
 	void Start()
@@ -29,7 +30,7 @@ public class RayCasting : MonoBehaviour
 		RaycastHit hit; // Variable reading information about the collider hit.
 
 		// Cast a ray from the center of screen towards where the player is looking.
-		if (Physics.Raycast (ray, out hit, Reach) && hit.collider.tag == GameTagCollider)
+		if (Physics.Raycast (ray, out hit, Reach) && hit.collider.tag == "Door")
 		{
 			InReach = true;
 
@@ -51,11 +52,21 @@ public class RayCasting : MonoBehaviour
                            StartCoroutine(dooropening.Open());
                         }
                     }
-                
 			}
 		}
+        else if (Physics.Raycast(ray, out hit, Reach) && hit.collider.tag == "JailDoor")
+        {
+            InReach = true;
 
-		else InReach = false;
+            if (Input.GetKey(KeyCode.E))
+            {
+                animator = hit.transform.gameObject.GetComponent<Animator>();
+                animator.SetTrigger("Open");
+                //Debug.Log("Jaildoor activeted");
+            }
+        }
+
+        else InReach = false;
 
 		//DEBUGGING
 		//if (InReach == true) print ("The player is able to open the door (Inreach = " + InReach + ").");
@@ -64,4 +75,13 @@ public class RayCasting : MonoBehaviour
 		// Draw the ray as a colored line for debugging purposes.
 		Debug.DrawRay (ray.origin, ray.direction*Reach, DebugRayColor);
 	}
+    //GUI FUNCTION
+    void OnGUI()
+    {
+        if (InReach == true)
+        {
+            GUI.color = Color.white;
+            GUI.Box(new Rect(20, 20, 200, 25), "Press 'E' to open/close");
+        }
+    }
 }
