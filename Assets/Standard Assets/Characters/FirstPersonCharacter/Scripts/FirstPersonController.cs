@@ -118,6 +118,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             questManager.LoadQuest(questId);
         }
 
+        public void LoadNextKeyQuest(string key)
+        {
+            questManager.LoadNextKeyQuest(key);
+        }
+
         public void Tell(string sender, string message)
         {
             dialogService.ShowDialog(sender, message);
@@ -321,7 +326,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 else
                 {
                     Debug.Log("Found key");
-                    questManager.LoadQuest(5, sp[1]);
+                    questManager.LoadKeyQuest(5, sp[1]);
                 }
             }
             else

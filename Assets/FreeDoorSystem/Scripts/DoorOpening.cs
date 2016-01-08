@@ -145,6 +145,9 @@ public class DoorOpening : MonoBehaviour {
                 return false;
             } else
             {
+                Debug.Log(AcceptKeyTag);
+                var sp = AcceptKeyTag.Split('_');
+                playerController.LoadNextKeyQuest(sp[1]);
                 playerController.inventory.RemoveItem(AcceptKeyTag);
                 return true;
             }    
