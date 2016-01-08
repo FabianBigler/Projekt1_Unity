@@ -15,19 +15,14 @@ public class RayCasting : MonoBehaviour
     Animator animator;
     bool jailDoorOpen;
 
-	//START FUNCTION
-	void Start()
-	{
-
-	}
-
 	//UPDATE FUNCTION
 	void Update()
 	{
-		// Set origin of ray to 'center of screen' and direction of ray to 'cameraview'.
-		Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5F, 0.5F, 0F));
+        // Set origin of ray to 'center of screen' and direction of ray to 'cameraview'.
+        Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5F, 0.5F, 0F));
+        Debug.DrawRay(ray.origin, ray.direction * Reach, DebugRayColor);
 
-		RaycastHit hit; // Variable reading information about the collider hit.
+        RaycastHit hit; // Variable reading information about the collider hit.
 
 		// Cast a ray from the center of screen towards where the player is looking.
 		if (Physics.Raycast (ray, out hit, Reach) && hit.collider.tag == "Door")
@@ -62,18 +57,12 @@ public class RayCasting : MonoBehaviour
             {
                 animator = hit.transform.gameObject.GetComponent<Animator>();
                 animator.SetTrigger("Open");
-                //Debug.Log("Jaildoor activeted");
+                Debug.Log("Jail door activeted");
             }
         }
 
         else InReach = false;
 
-		//DEBUGGING
-		//if (InReach == true) print ("The player is able to open the door (Inreach = " + InReach + ").");
-		//else print ("The player is not able to open the door (Inreach = " + InReach + ").");
-
-		// Draw the ray as a colored line for debugging purposes.
-		Debug.DrawRay (ray.origin, ray.direction*Reach, DebugRayColor);
 	}
     //GUI FUNCTION
     void OnGUI()

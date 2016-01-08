@@ -661,6 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLevel: L1_Forest
+  level2Music: {fileID: 0}
 --- !u!4 &1837149779
 Transform:
   m_ObjectHideFlags: 0
