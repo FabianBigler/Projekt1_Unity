@@ -57,9 +57,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 animator.SetTrigger("creature1run");
                 nav.speed = chaseSpeed;
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
-               
+                //AudioSource audio = GetComponent<AudioSource>();
+                //audio.Play();               
             } else
             {
                 animator.SetTrigger("creature1attack2");
@@ -173,6 +172,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //immune to flashlight!
             if(!onlyTargetNPC)
             {
+                var audio = GetComponent<AudioSource>();
+                if (!audio.isPlaying)
+                {
+                    audio.Play();
+                }           
                 isEscaping = true;
             }
         }
