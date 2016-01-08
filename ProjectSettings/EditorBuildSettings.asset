@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/L1_Forest.unity
   - enabled: 1
     path: Assets/L2_HauntedHouse.unity
+  - enabled: 1
+    path: Assets/L9_GameComplete.unity

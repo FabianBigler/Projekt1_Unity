@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	public void StartGame () {
-        Application.LoadLevel(startLevel);
+        SceneManager.LoadScene(startLevel);
 	}
 	
 	// Update is called once per frame

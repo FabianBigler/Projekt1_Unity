@@ -24,6 +24,7 @@ public class QuestManager {
         quests.Add(10, "Light it up!");
         quests.Add(11, "Maybe there is a hidden treasure.");
         quests.Add(12, "What is this noise?");
+        quests.Add(13, "Congratulations, you found your daughter.");
 
         keyQuestPair = new Dictionary<string, int>();
         keyQuestPair.Add("blue", 6);
