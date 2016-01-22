@@ -132,6 +132,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             dialogService.ShowDialog("Me", "Oh nooo...I failed!");
             Application.LoadLevel("L0_Menu");
+            Cursor.visible = true;
         }
  
         private void PlayLandingSound()

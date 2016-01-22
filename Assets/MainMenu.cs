@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour {
 	// Use this for initialization
 	public void StartGame () {
         SceneManager.LoadScene(startLevel);
+        Cursor.visible = false;
 	}
 	
 	// Update is called once per frame

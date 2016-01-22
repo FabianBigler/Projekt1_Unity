@@ -21,6 +21,7 @@ public class GameCompleteTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(nextLevel);
+        Cursor.visible = true;
     }
 
 }
