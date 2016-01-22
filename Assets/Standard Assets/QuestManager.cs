@@ -12,7 +12,7 @@ public class QuestManager {
     {
         this.questTxt = questText;
         quests = new Dictionary<int, string>();
-        quests.Add(1, "Find the house were your daughter Kelly might be detained.");
+        quests.Add(1, "Find the house where your daughter Kelly might be detained.");
         quests.Add(2, "The door is locked. Find the key!");
         quests.Add(3, "You found the key! Enter the house.");
         quests.Add(4, "Your daughter Kelly must be in one of these rooms. Seems like you have to find the appropriate keys.");

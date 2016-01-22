@@ -28,8 +28,7 @@ public class LightWallTrigger : MonoBehaviour
         if(lightwalls.Contains(tag))
         {
             light.intensity = 3;
-            light.enabled = true;
-            Debug.Log(tag + ": Light ON!");
+            light.enabled = true;        
         } else
         {
             light.intensity = 0;
