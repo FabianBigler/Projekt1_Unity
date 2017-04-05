@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class MonsterAI : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Animator animator;
         private EnemySight enemySight;
         // Reference to the EnemySight script.
-        private NavMeshAgent nav;                               // Reference to the nav mesh agent.
+        private UnityEngine.AI.NavMeshAgent nav;                               // Reference to the nav mesh agent.
         //private Transform player;                               // Reference to the player's transform.
        // private LastPlayerSighting lastPlayerSighting;          // Reference to the last global sighting of the player.
         private float chaseTimer;                               // A timer for the chaseWaitTime.
@@ -36,12 +36,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             enemySight = GetComponent<EnemySight>();
             enemySight.onlyTargetNPC = onlyTargetNPC;
-            nav = GetComponent<NavMeshAgent>();
+            nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
             //player = GameObject.FindGameObjectWithTag("Hero").transform;
             animator = GetComponent<Animator>();
             animator.Play("creature1walkforward");
             // get the components on the object we need ( should not be null due to require component so no need to check )
-            nav = GetComponentInChildren<NavMeshAgent>();
+            nav = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             //character = GetComponent<ThirdPersonCharacter>();
             nav.updateRotation = true;
             nav.updatePosition = true;

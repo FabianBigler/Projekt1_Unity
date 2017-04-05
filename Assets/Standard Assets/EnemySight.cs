@@ -10,7 +10,7 @@ public class EnemySight : MonoBehaviour
     public GameObject targetHero;
     public bool onlyTargetNPC;
 
-    private NavMeshAgent nav;                       // Reference to the NavMeshAgent component.
+    private UnityEngine.AI.NavMeshAgent nav;                       // Reference to the NavMeshAgent component.
     private SphereCollider col;                     // Reference to the sphere collider trigger component.
     //private LastPlayerSighting lastPlayerSighting;  // Reference to last global sighting of the player.
     private List<GameObject> players;                      // Reference to the player.
@@ -23,7 +23,7 @@ public class EnemySight : MonoBehaviour
 
     void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
+        nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         col = GetComponent<SphereCollider>();
         players = new List<GameObject>();
         if (!onlyTargetNPC)
@@ -70,7 +70,7 @@ public class EnemySight : MonoBehaviour
     float CalculatePathLength(Vector3 targetPosition)
     {
         // Create a path and set it based on a target position.
-        NavMeshPath path = new NavMeshPath();
+        UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
         if (nav.enabled)
             nav.CalculatePath(targetPosition, path);
 
